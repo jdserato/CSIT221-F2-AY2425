@@ -1,15 +1,24 @@
 #include "list.h"
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 class ArrayList : public List {
 	public:
-	int size = 0;
-	int array[500000];
+	int size;
+	int* array;
+	int cap;
+	ArrayList() {  
+		cap = 5;
+		array = (int*) malloc(cap * sizeof(int));
+		size = 0;
+	}
 	void add(int num) {
-		if (size == 5) {
-			cout << "Stop";
-			return;
+		if (size == cap) {
+			cout << "REALLOCATING..." << endl;
+			cap = cap * 1.5;
+			array = (int*) realloc(array, cap * sizeof(int)); // array, new size
+//			return;
 		}
 		cout <<num << " to be added" << endl;
 		array[size++] = num;
@@ -20,7 +29,7 @@ class ArrayList : public List {
 	}
 	
 	void print() {
-		cout << "Size = "<< size << endl;
+		cout << "Size = "<< size << "/" << cap << endl;
 		for (int i = 0; i < size; i++) {
 			cout << array[i] << " ";
 		}
