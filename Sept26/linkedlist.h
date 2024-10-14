@@ -10,15 +10,29 @@ class LinkedList : public List {
 	public:
 	LinkedList() {
 		head = new node;
+		cout << "Head add: " << head << endl;
 		tail = new node;
+		cout << "Tail add: " << tail << endl;
 		head->next = tail;
 		tail->prev = head;
+		size = 0;
+	}
+	~LinkedList() {
+		cout << "Deleting myself from here"<< endl;
+		// free all nodes bye byeeeeeeeeeeeeeee
+		node* curr = head;
+		while (curr != tail) {
+			curr = curr->next;
+			delete curr->prev;
+		}
+		delete tail;
 	}
 	void add(int num) {
 		add_between(num, tail->prev, tail);
 	}
 	node* add_between(int num, node* pred, node* succ) {
-		node* n = new node;
+		node* n = (node*) malloc( sizeof( node )) ;
+		cout << "Address is " << n << endl;
 		n->elem = num;
 		n->prev = pred;
 		n->next = succ;
@@ -30,10 +44,8 @@ class LinkedList : public List {
 		add_between(num, head, head->next);
 	}
 	int removeHead() {
-		int tmp = head->elem;
-		node* stuff = head;
-		head = head->next;
-		free(stuff);
+		int tmp = head->next->elem;
+		remove_node(head->next);
 		return tmp;
 	}
 	int get(int pos) {
@@ -44,10 +56,10 @@ class LinkedList : public List {
 		return curr->elem;
 	}
 	void remove_node(node* n) {
-		node* next = n->next;
-		node* prev = n->prev;
-		prev->next = next;
-		next->prev = prev;
+		node* succ = n->next;
+		node* pred = n->prev;
+		pred->next = succ;
+		succ->prev = pred;
 		free(n);
 	}
 	

@@ -1,31 +1,24 @@
 #include <iostream>
-#include "arraylist.h"
+#include "stackarray.h"
 using namespace std;
 
 int main() {
-	cout << sizeof(ArrayList) << endl;
-	List* list = new ArrayList();
-	cout << sizeof(*list) << endl;
-	list->add(13);
-	cout << sizeof(list) << endl;
-	list->add(4);
-	list->add(7);
-	list->add(9);
-	list->add(10);
-	list->add(15);
-	list->add(20);
-	list->add(25);
-	list->add(10);
-	list->add(15);
-	list->add(20);
-	list->add(25);
-	list->print();
-	cout << sizeof(list) << endl;
-	cout << "Third element is : " << list->get(3) <<endl;//7
-	cout << "Fifth element is : " << list->get(5) <<endl;//10
-	cout << sizeof(list) << endl;
-	delete list;
-	delete list;
-	cout << sizeof(list) << endl;
+	Stack* stack = new StackArray();
+	stack->push(5);
+	stack->push(3);
+	cout << stack->pop() << endl; // 3
+	cout << stack->top() << endl; // 5
+	cout << stack->pop() << endl; // 5
+	stack->push(7);
+	stack->push(9);
+	stack->push(4);
+	cout << stack->pop() << endl; // 4
+	cout << stack->top() << endl; // 9
+	stack->push(6);
+	stack->push(8);
+	cout << stack->pop() << endl; // 8
+	cout << stack->top() << endl; // 6
+	cout << "Is Empty? " << stack->isEmpty() << endl;
+	cout << "Size? " << stack->size() << endl;
 	return 0;
 }

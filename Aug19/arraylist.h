@@ -26,6 +26,10 @@ class ArrayList : public List {
 		array[size++] = num;
 	}
 	
+	int removeLast() {
+		return array[--size];
+	}
+	
 	int get(int pos) {
 		return array[pos-1];
 	}
