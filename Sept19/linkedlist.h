@@ -8,6 +8,9 @@ class LinkedList : public List {
 	int size;
 	
 	public:
+	int getSize() {
+		return size;
+	}
 	void addTail(int num) {
 		if (!head) {
 			head = new node;
@@ -22,7 +25,7 @@ class LinkedList : public List {
 		}
 		size++;
 	}
-	void add(int num) {
+	void add(int num) { // addHead
 		if (!head) {
 			head = new node;
 			head->elem = num;
@@ -41,6 +44,7 @@ class LinkedList : public List {
 		node* stuff = head;
 		head = head->next;
 		free(stuff);
+		size--;
 		return tmp;
 	}
 	int get(int pos) {
